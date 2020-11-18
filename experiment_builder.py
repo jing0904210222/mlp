@@ -157,7 +157,7 @@ class ExperimentBuilder(nn.Module):
         for name, param in named_parameters:
             if (param.requires_grad) and ('bias' not in name):
                 layers.append(name)
-                all_grads.append(np.mean(param.grad.abs()))
+                all_grads.append(param.grad.abs().mean())
         
         ########################################
         plt = self.plot_func_def(all_grads, layers)
