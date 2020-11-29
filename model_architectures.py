@@ -587,7 +587,7 @@ class ConvolutionalDimensionalityReductionBlock_Residual_BN_Projection(nn.Module
 
         # this layer is for projection
         self.layer_dict['conv_2'] = nn.Conv2d(in_channels=identity.shape[1], out_channels=self.num_filters, bias=self.bias,
-                                              kernel_size=self.reduction_factor, dilation=0,
+                                              kernel_size=1, dilation=1,
                                               padding=0, stride=self.reduction_factor)
 
         out = F.leaky_relu(self.layer_dict['bn_1'].forward(out + self.layer_dict['conv_2'].forward(identity)))
@@ -606,5 +606,5 @@ class ConvolutionalDimensionalityReductionBlock_Residual_BN_Projection(nn.Module
 
         out = self.layer_dict['conv_1'].forward(out)
         out = F.leaky_relu(self.layer_dict['bn_1'].forward(out + self.layer_dict['conv_2'].forward(identity)))
-
+        ggg = self.layer_dict['conv_2'].forward(identity)
         return out
